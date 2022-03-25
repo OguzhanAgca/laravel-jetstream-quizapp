@@ -1,3 +1,35 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.btn {
+    @apply inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition;
+}
+
+.btn-dark {
+    @apply bg-gray-800 hover:bg-gray-700 active:bg-gray-900 focus:border-gray-900 focus:ring-gray-300;
+}
+
+.btn-primary {
+    @apply bg-blue-800 hover:bg-blue-700 active:bg-blue-900 focus:border-blue-900 focus:ring-blue-300;
+}
+
+.btn-danger {
+    @apply bg-red-800 hover:bg-red-700 active:bg-red-900 focus:border-red-900 focus:ring-red-300;
+}
+
+.btn-info {
+    @apply bg-orange-800 hover:bg-orange-700 active:bg-orange-900 focus:border-orange-900 focus:ring-orange-300;
+}
+
+.btn-purple {
+    @apply bg-purple-800 hover:bg-purple-700 active:bg-purple-900 focus:border-purple-900 focus:ring-purple-300;
+}
+
+.form-control {
+    @apply border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full;
+}
+
+.form-label {
+    @apply block font-medium text-sm text-gray-700;
+}

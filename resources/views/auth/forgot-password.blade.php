@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <x-slot name="header">
+        Forgot Password
+    </x-slot>
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />

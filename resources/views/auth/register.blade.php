@@ -1,8 +1,12 @@
 <x-guest-layout>
+    <x-slot name="header">
+        Register
+    </x-slot>
+
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
-        </x-slot>
+        </x-slot>    
 
         <x-jet-validation-errors class="mb-4" />
 
