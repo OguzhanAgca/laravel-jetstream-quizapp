@@ -18,6 +18,7 @@ Route::group([
     'middleware' => ['auth:sanctum', 'verified', 'is.admin'],
     'prefix' => '/dashboard'
 ], function () {
+    Route::post('/quizzes/delete', [QuizController::class, 'destroy'])->name('quizzes.delete');
     Route::resources([
         '/quizzes' => QuizController::class
     ]);

@@ -87,8 +87,11 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $quiz_id = intval($request->quiz_id);
+        Quiz::findOrFail($quiz_id)->delete();
+        toastr()->success('The quiz successfully deleted!');
+        return redirect()->route('quizzes.index');
     }
 }
