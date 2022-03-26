@@ -5,16 +5,21 @@
             <div class="flex flex-row justify-start">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('quizzes') }}">
+                    <a href="{{ route('quizzes.home') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:flex">
-                    <x-jet-nav-link href="{{ route('quizzes') }}" :active="request()->routeIs('quizzes')">
+                    <x-jet-nav-link href="{{ route('quizzes.home') }}" :active="request()->routeIs('quizzes.home')">
                         {{ __('Quizzes') }}
                     </x-jet-nav-link>
+                    @if (auth()->user()->type === 'admin')
+                        <x-jet-nav-link href="{{ route('quizzes.index') }}" :active="request()->routeIs('quizzes.index')">
+                            {{ __('Quizzes / Admin') }}
+                        </x-jet-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -91,6 +96,17 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            @if (auth()->user()->type === 'admin')
+                                <!-- Admin Management -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    {{ __('Admin Process') }}
+                                </div>
+
+                                <x-jet-dropdown-link href="{{ route('quizzes.index') }}">
+                                    {{ __('Quizzes') }}
+                                </x-jet-dropdown-link>
+                            @endif
+
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
@@ -137,12 +153,18 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('quizzes') }}" :active="request()->routeIs('quizzes')">
+            @if (auth()->user()->type === 'admin')
+                <x-jet-responsive-nav-link href="{{ route('quizzes.index') }}" :active="request()->routeIs('quizzes.index')">
+                    {{ __('Quizzes / Admin') }}
+                </x-jet-responsive-nav-link>
+            @endif
+            <x-jet-responsive-nav-link href="{{ route('quizzes.home') }}" :active="request()->routeIs('quizzes.home')">
                 {{ __('Quizzes') }}
             </x-jet-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
+        {{-- RESPONSIVE ICIN ADMIN PROCESS VE QUIZ ISLEMLERI EKLE --}}
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())

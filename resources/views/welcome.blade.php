@@ -29,14 +29,18 @@
                     <h4 class="lg:text-5xl md:text-4xl sm:text-3xl text-2xl">Quiz App</h4>
                     <div class="sm:text-lg text-current">Try yourself and your knowledge.</div>
                     @if (Route::has('login'))
-                    <div class="">
+                    <div class="flex flex-row gap-6 items-center justify-center">
                         @auth
-                            <a href="{{ route('quizzes') }}" class="btn btn-dark">Quizzes</a>
+                            <a href="{{ route('quizzes.home') }}" class="btn btn-dark">Quizzes</a>
+                            <form method="POST" name="logout" action="{{ route('logout') }}">
+                                @csrf
+                                <a href="javascript:document.logout.submit()" class="btn btn-danger">Logout</a>
+                          </form>
                         @else
                             <a href="{{ route('login') }}" class="btn btn-primary">Log in</a>
     
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="ml-4 btn btn-purple">Register</a>
+                                <a href="{{ route('register') }}" class="btn btn-purple">Register</a>
                             @endif
                         @endauth
                     </div>
