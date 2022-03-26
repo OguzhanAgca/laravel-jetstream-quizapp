@@ -31,7 +31,7 @@
                     <div class="mb-3">
                         <label for="quiz_status" class="form-label">Quiz Status</label>
                         <select name="quiz_status" id="quiz_status" class="form-control">
-                            <option @if(old('quiz_status') == 'publish' || $quiz->quiz_status == 'publish') selected @endif value="publish">Publish</option>
+                            <option @if(old('quiz_status') == 'publish' || $quiz->quiz_status == 'publish') selected @endif @if($quiz->get_questions_count < 4) disabled @endif value="publish">Publish @if($quiz->get_questions_count < 4) (Must have at least 4 questions) @endif</option>
                             <option @if(old('quiz_status') == 'draft' || $quiz->quiz_status == 'draft') selected @endif value="draft">Draft</option>
                             <option @if(old('quiz_status') == 'passive' || $quiz->quiz_status == 'passive') selected @endif value="passive">Passive</option>
                         </select>

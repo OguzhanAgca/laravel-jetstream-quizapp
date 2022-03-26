@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\admin\QuizController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\admin\QuizController;
+use App\Http\Controllers\admin\QuestionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -20,6 +21,7 @@ Route::group([
 ], function () {
     Route::post('/quizzes/delete', [QuizController::class, 'destroy'])->name('quizzes.delete');
     Route::resources([
-        '/quizzes' => QuizController::class
+        '/quizzes' => QuizController::class,
+        '/quizzes/{quiz}/questions' => QuestionController::class
     ]);
 });
