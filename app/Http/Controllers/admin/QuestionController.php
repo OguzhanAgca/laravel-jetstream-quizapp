@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
+use App\Http\Requests\StoreQuestionRequest;
 
 class QuestionController extends Controller
 {
@@ -25,9 +26,10 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($quiz_id)
     {
-        //
+        $quiz = Quiz::findOrFail($quiz_id);
+        return view('admin.question.create', compact('quiz'));
     }
 
     /**
@@ -36,9 +38,19 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreQuestionRequest $request, $quiz_id)
     {
-        //
+        if ($request->question_image && $request->question_image->isValid()) {
+            $newFileName = uniqid() . '_' . $request->question_image->getClientOriginalName();
+            $request->question_image->move(public_path('uploads'), $newFileName);
+            $request->merge([
+                'question_image' => $newFileName
+            ]);
+        }
+
+        Quiz::findOrFail($quiz_id)->getQuestions()->create($request->post()) ?? abort(400);
+        toastr()->success('The question successfully created!');
+        return redirect()->route('questions.create', $quiz_id);
     }
 
     /**

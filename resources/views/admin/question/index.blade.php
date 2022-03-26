@@ -29,12 +29,14 @@
                         <tbody>
                             @foreach ($questions as $question)
                                 <tr class="hover:bg-slate-300">
-                                    <td class="table-cell text-center">
-                                        @if($question->question_image)
-                                            <img src="{{asset('uploads').'/'.$question->question_image}}" alt="Q.Image" width="350">
-                                        @else
-                                            <div class="p-1 bg-slate-600 text-white rounded-md">No Image</div>
-                                        @endif
+                                    <td class="table-cell">
+                                        <div class="flex justify-center items-center">
+                                            @if($question->question_image)
+                                                <img src="{{asset('uploads').'/'.$question->question_image}}" alt="Q.Image" width="150" class="rounded-md">
+                                            @else
+                                                <div class="p-1 bg-slate-600 text-white text-center rounded-md">No Image</div>
+                                            @endif
+                                        </div>
                                     </td>
                                     <td class="table-cell">{{$question->question}}</td>
                                     <td class="table-cell text-center">{{$question->answer_a}}</td>
@@ -49,7 +51,6 @@
                                     </td>
                                     <td class="table-cell text-center">
                                         <div class="flex flex-row justify-center items-center gap-2">
-                                            <a href="#" class="btn btn-purple"><i class="fas fa-question py-2 fa-xl"></i></a>
                                             <a href="#" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
                                             <button type="button" class="btn btn-danger"><i class="fas fa-times fa-xl py-2"></i></button>
                                         </div>
