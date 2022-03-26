@@ -13,7 +13,7 @@ class StoreQuizRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->user()->type === 'admin' ? true : false;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreQuizRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'quiz_title' => 'required|min:2|max:150|unique:App\Models\Quiz,quiz_title',
+            'quiz_description' => 'nullable|min:10|max:1000',
+            'finished_at' => 'nullable|after:' . now()
         ];
     }
 }

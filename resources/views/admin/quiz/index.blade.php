@@ -6,7 +6,7 @@
     <x-slot name="content">
         <div class="container p-4 flex flex-col gap-5">
             <div>
-                <a href="#" class="btn btn-primary">Create Quiz</a>
+                <a href="{{route('quizzes.create')}}" class="btn btn-primary">Create Quiz</a>
             </div>
 
             <div>

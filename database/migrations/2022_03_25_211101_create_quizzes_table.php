@@ -20,7 +20,7 @@ return new class extends Migration
             $table->id('quiz_id');
             $table->string('quiz_title');
             $table->string('quiz_slug')->nullable(true);
-            $table->longText('quiz_description');
+            $table->longText('quiz_description')->nullable(true);
             $table->enum('quiz_status', ['publish', 'draft', 'passive'])->default('draft');
             $table->timestamp('finished_at')->nullable(true);
             $table->timestamp('created_at')->useCurrent();
