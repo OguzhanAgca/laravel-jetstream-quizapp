@@ -41,7 +41,7 @@
                                 <td class="table-cell text-center">
                                     <div class="flex flex-row justify-center items-center gap-2">
                                         <a href="#" class="btn btn-purple"><i class="fas fa-question py-2 fa-xl"></i></a>
-                                        <a href="#" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
+                                        <a href="{{route('quizzes.edit', $quiz->quiz_id)}}" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
                                         <button type="button" class="btn btn-danger"><i class="fas fa-times fa-xl py-2"></i></button>
                                     </div>
                                 </td>

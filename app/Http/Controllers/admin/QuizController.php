@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Http\Requests\StoreQuizRequest;
+use App\Http\Requests\UpdateQuizRequest;
 
 class QuizController extends Controller
 {
@@ -60,9 +61,10 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($quiz_id)
     {
-        //
+        $quiz = Quiz::findOrFail($quiz_id);
+        return view('admin.quiz.edit', compact('quiz'));
     }
 
     /**
@@ -72,9 +74,11 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateQuizRequest $request, $quiz_id)
     {
-        //
+        Quiz::findOrFail($quiz_id)->updateOrFail($request->validated());
+        toastr()->success('The quiz successfully updated!');
+        return redirect()->route('quizzes.index');
     }
 
     /**
