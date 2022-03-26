@@ -51,8 +51,8 @@
                                     </td>
                                     <td class="table-cell text-center">
                                         <div class="flex flex-row justify-center items-center gap-2">
-                                            <a href="#" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
-                                            <button type="button" class="btn btn-danger"><i class="fas fa-times fa-xl py-2"></i></button>
+                                            <a href="{{route('questions.edit', [$quiz->quiz_id,$question->question_id])}}" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
+                                            <button type="button" question-id="{{$question->question_id}}" class="btn btn-danger remove-btn"><i class="fas fa-times fa-xl py-2"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -77,7 +77,7 @@
                 <hr class="my-3">
                 <div>
                     <p>This quiz and all the questions in it will be deleted.</p>
-                    <form id="question_delete_form" action="{{route('quizzes.delete')}}" method="post">
+                    <form id="question_delete_form" action="{{route('questions.delete', $quiz->quiz_id)}}" method="post">
                         @method('DELETE')
                         @csrf
                         <input type="hidden" name="question_id" id="question_id">
@@ -99,7 +99,7 @@
             $(document).ready(function(){
                 $(document).on('click', '.remove-btn', function(){
                     $('#question_delete_modal').addClass('modal-active');
-                    const id = $(this)[0].getAttribute();
+                    const id = $(this)[0].getAttribute('question-id');
                     $('#question_id').val(id);
                 });
 

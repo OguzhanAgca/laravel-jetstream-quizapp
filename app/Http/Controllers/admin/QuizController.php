@@ -78,7 +78,7 @@ class QuizController extends Controller
     {
         $questionCount = Quiz::withCount('getQuestions')->findOrFail($quiz_id)->get_questions_count;
 
-        if ($questionCount < 4) {
+        if ($questionCount < 4 && $request->quiz_status === 'publish') {
             toastr()->error('Question count error! Do not try this!');
             return redirect()->route('quizzes.edit', $quiz_id);
         }

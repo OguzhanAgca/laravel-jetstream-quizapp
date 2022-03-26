@@ -20,6 +20,7 @@ Route::group([
     'prefix' => '/dashboard'
 ], function () {
     Route::post('/quizzes/delete', [QuizController::class, 'destroy'])->name('quizzes.delete');
+    Route::post('/quizzes/{quiz}/questions/delete', [QuizController::class, 'destroy'])->name('questions.delete');
     Route::resources([
         '/quizzes' => QuizController::class,
         '/quizzes/{quiz}/questions' => QuestionController::class
