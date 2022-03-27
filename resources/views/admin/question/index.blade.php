@@ -43,7 +43,7 @@
                                     <td class="table-cell text-center">{{$question->answer_b}}</td>
                                     <td class="table-cell text-center">{{$question->answer_c}}</td>
                                     <td class="table-cell text-center">{{$question->answer_d}}</td>
-                                    <td class="table-cell text-center w-28">
+                                    <td class="table-cell text-center w-28 cursor-default">
                                         <div class="p-1 rounded-full bg-green-700 text-white font-bold">
                                             Option 
                                             <span class="uppercase">{{substr($question->correct_answer, -1)}}</span>
@@ -51,8 +51,24 @@
                                     </td>
                                     <td class="table-cell text-center">
                                         <div class="flex flex-row justify-center items-center gap-2">
-                                            <a href="{{route('questions.edit', [$quiz->quiz_id,$question->question_id])}}" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
-                                            <button type="button" question-id="{{$question->question_id}}" class="btn btn-danger remove-btn"><i class="fas fa-times fa-xl py-2"></i></button>
+                                            <span class="relative flex flex-col items-center group">
+                                                <a href="{{route('questions.edit', [$quiz->quiz_id,$question->question_id])}}" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
+                                                <div class="absolute bottom-0 flex flex-col items-center hidden mb-8 group-hover:flex">
+                                                    <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
+                                                        Edit
+                                                    </span>
+                                                    <div class="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
+                                                </div>
+                                            </span>
+                                            <span class="relative flex flex-col items-center group">
+                                                <button type="button" question-id="{{$question->question_id}}" class="btn btn-danger remove-btn"><i class="fas fa-times fa-xl py-2"></i></button>
+                                                <div class="absolute bottom-0 flex flex-col items-center hidden mb-8 group-hover:flex">
+                                                    <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
+                                                        Delete
+                                                    </span>
+                                                    <div class="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
+                                                </div>
+                                            </span>
                                         </div>
                                     </td>
                                 </tr>

@@ -5,8 +5,22 @@
 
     <x-slot name="content">
         <div class="container p-4 flex flex-col gap-5">
-            <div>
+            <div class="flex flex-row justify-between items-center">
                 <a href="{{route('quizzes.create')}}" class="btn btn-primary">Create Quiz</a>
+                <form method="get">
+                    <div class="flex flex-row gap-3 items-center">
+                        <input type="text" name="quiz" id="quiz" class="form-control" placeholder="Search.." value="{{Request::get('quiz')}}">
+                        <select name="status" id="status" class="form-control" onchange="this.form.submit()">
+                            <option selected disabled>-- Status --</option>
+                            <option @if(Request::get('status') == 'publish') selected @endif value="publish">Publish</option>
+                            <option @if(Request::get('status') == 'draft') selected @endif value="draft">Draft</option>
+                            <option @if(Request::get('status') == 'passive') selected @endif value="passive">Passive</option>
+                        </select>
+                        @if(Request::get('quiz') || Request::get('status'))
+                            <a href="{{route('quizzes.index')}}" class="btn btn-danger mt-1"><i class="fas fa-times fa-xl py-2.5"></i></a>
+                        @endif
+                    </div>
+                </form>
             </div>
 
             <div>
@@ -40,12 +54,46 @@
                                         @endswitch
                                     </td>
                                     <td class="table-cell text-center">{{$quiz->get_questions_count}}</td>
-                                    <td class="table-cell text-center">{{$quiz->finished_at ? $quiz->finished_at->diffForHumans() : '-'}}</td>
+                                    <td class="table-cell text-center cursor-default">
+                                        <div class="relative flex flex-col items-center group">
+                                            {{$quiz->finished_at ? $quiz->finished_at->diffForHumans() : '-'}}
+                                            <div class="absolute bottom-0 flex flex-col items-center hidden mb-6 group-hover:flex">
+                                                <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
+                                                    {{$quiz->finished_at}}
+                                                </span>
+                                                <div class="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td class="table-cell text-center">
                                         <div class="flex flex-row justify-center items-center gap-2">
-                                            <a href="{{route('questions.index', $quiz->quiz_id)}}" class="btn btn-purple"><i class="fas fa-question py-2 fa-xl"></i></a>
-                                            <a href="{{route('quizzes.edit', $quiz->quiz_id)}}" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
-                                            <button type="button" quiz-id="{{$quiz->quiz_id}}" class="btn btn-danger remove-btn"><i class="fas fa-times fa-xl py-2"></i></button>
+                                            <span class="relative flex flex-col items-center group">
+                                                <a href="{{route('questions.index', $quiz->quiz_id)}}" class="btn btn-purple"><i class="fas fa-question py-2 fa-xl"></i></a>
+                                                <div class="absolute bottom-0 flex flex-col items-center hidden mb-8 group-hover:flex">
+                                                    <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
+                                                        Questions
+                                                    </span>
+                                                    <div class="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
+                                                </div>
+                                            </span>
+                                            <span class="relative flex flex-col items-center group">
+                                                <a href="{{route('quizzes.edit', $quiz->quiz_id)}}" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
+                                                <div class="absolute bottom-0 flex flex-col items-center hidden mb-8 group-hover:flex">
+                                                    <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
+                                                        Edit
+                                                    </span>
+                                                    <div class="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
+                                                </div>
+                                            </span>
+                                            <span class="relative flex flex-col items-center group">
+                                                <button type="button" quiz-id="{{$quiz->quiz_id}}" class="btn-danger btn remove-btn"><i class="fas fa-times fa-xl py-2"></i></button>
+                                                <div class="absolute bottom-0 flex flex-col items-center hidden mb-8 group-hover:flex">
+                                                    <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
+                                                        Delete
+                                                    </span>
+                                                    <div class="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
+                                                </div>
+                                            </span>
                                         </div>
                                     </td>
                                 </tr>
@@ -55,7 +103,7 @@
                 </div>
 
                 <div class="mt-4">
-                    {{$quizzes->links()}}
+                    {{$quizzes->withQueryString()->links()}}
                 </div>
             </div>
         </div>

@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        {{-- <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.1/dist/flowbite.min.css" /> --}}
 
         @livewireStyles
         @toastr_css
@@ -54,6 +55,7 @@
         @jquery
         @toastr_js
         @toastr_render
+        {{-- <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script> --}}
         @isset($script)
             {{ $script }}
         @endisset
