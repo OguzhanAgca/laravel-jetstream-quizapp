@@ -22,4 +22,10 @@ class HomeController extends Controller
 
         return view('home.index', compact('quizzes', 'results'));
     }
+
+    public function quizDetail($quiz_slug)
+    {
+        $quiz = Quiz::whereQuizSlug($quiz_slug)->with('getTopTenUser.getUser')->withCount('getQuestions')->first() ?? abort(404);
+        return view('home.quiz_detail', compact('quiz'));
+    }
 }
