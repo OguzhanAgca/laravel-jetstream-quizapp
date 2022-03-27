@@ -65,7 +65,10 @@ class Quiz extends Model
         foreach ($results as $result) {
             $score += $result->score;
         }
-        $averageScore = round($score / count($results));
+
+        $participantCount = $this->getTotalParticipantsAttribute() == 0 ? 1 : $this->getTotalParticipantsAttribute();
+
+        $averageScore = round($score / $participantCount);
 
         return $averageScore;
     }

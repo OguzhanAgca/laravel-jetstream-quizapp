@@ -28,4 +28,10 @@ class HomeController extends Controller
         $quiz = Quiz::whereQuizSlug($quiz_slug)->with('getTopTenUser.getUser')->withCount('getQuestions')->first() ?? abort(404);
         return view('home.quiz_detail', compact('quiz'));
     }
+
+    public function quizJoin($quiz_slug)
+    {
+        $quiz = Quiz::whereQuizSlug($quiz_slug)->with('getQuestions')->first() ?? abort(404);
+        return view('home.quiz_join', compact('quiz'));
+    }
 }

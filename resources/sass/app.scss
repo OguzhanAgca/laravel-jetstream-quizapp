@@ -31,6 +31,10 @@
     @apply bg-purple-800 hover:bg-purple-700 active:bg-purple-900 focus:border-purple-900 focus:ring-purple-300;
 }
 
+.btn-success {
+    @apply bg-green-800 hover:bg-green-700 active:bg-green-900 focus:border-green-900 focus:ring-green-300;
+}
+
 .form-control {
     @apply border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full;
 }

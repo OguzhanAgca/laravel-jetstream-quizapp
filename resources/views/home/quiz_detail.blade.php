@@ -36,6 +36,7 @@
                 </div>
 
                 <div class="text-xl font-bold text-center my-2">Top Ten User</div>
+                @if(count($quiz->getTopTenUser) > 0)
                 @foreach ($quiz->getTopTenUser as $result)
                     <div class="flex flex-row justify-between items-center">
                         <div class="flex flex-row gap-3 items-center">
@@ -50,11 +51,14 @@
                         <hr class="my-2">
                     @endif
                 @endforeach
+                @else
+                    <div class="text-lg text-red-700 font-bold text-center">No participants yet</div>
+                @endif
             </div>
             <div class="flex flex-col md:w-3/5 w-full gap-2">
                 <div class="text-slate-700">{{$quiz->quiz_description}}</div>
                 <div>
-                    <a href="#" class="btn btn-primary block w-full justify-center">Join Quiz</a>
+                    <a href="{{route('quiz.join', $quiz->quiz_slug)}}" class="btn btn-primary block w-full justify-center">Join Quiz</a>
                 </div>
             </div>
         </div>

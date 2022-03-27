@@ -9,12 +9,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/quizzes', [HomeController::class, 'quizzes'])->name('quizzes.home');
+    Route::get('/quiz/{slug}', [HomeController::class, 'quizJoin'])->name('quiz.join');
+    Route::post('/quiz/{slug}', [HomeController::class, 'quizStore'])->name('quiz.store');
     Route::get('/quiz/{slug}/detail', [HomeController::class, 'quizDetail'])->name('quiz.detail');
 });
-
-// Route::middleware()->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
 
 Route::group([
     'middleware' => ['auth:sanctum', 'verified', 'is.admin'],
