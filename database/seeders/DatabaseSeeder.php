@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\QuizSeeder;
 use Database\Seeders\QuestionSeeder;
+use Database\Seeders\AnswerSeeder;
+use Database\Seeders\ResultSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             QuizSeeder::class,
-            QuestionSeeder::class
+            QuestionSeeder::class,
+            AnswerSeeder::class,
+            ResultSeeder::class,
         ]);
     }
 }
