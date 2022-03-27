@@ -48,7 +48,18 @@
             </div>
 
             <div class="md:w-2/5 w-full flex flex-col">
-
+                <div class="text-center text-xl font-bold mb-2">Your Quiz Results</div>
+                <div class="flex flex-col">
+                    @foreach ($results as $result)
+                        <div class="flex items-center justify-between">
+                            <a href="#" class="font-semibold">{{$result->getQuiz->quiz_title}}</a>
+                            <div class="text-sm p-1 rounded-md bg-green-600 text-white">{{$result->score}}</div>
+                        </div>
+                        @if(!$loop->last)
+                            <hr class="my-2">
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
     </x-slot>

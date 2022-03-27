@@ -17,6 +17,9 @@ class HomeController extends Controller
         $quizzes = Quiz::where('quiz_status', 'publish')->where(function ($query) {
             $query->where('finished_at', '>', now())->orWhere('finished_at', null);
         })->withCount('getQuestions')->paginate(7);
-        return view('home.index', compact('quizzes'));
+
+        $results = auth()->user()->getAuthUserResults;
+
+        return view('home.index', compact('quizzes', 'results'));
     }
 }

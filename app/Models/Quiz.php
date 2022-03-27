@@ -24,6 +24,7 @@ class Quiz extends Model
         'updated_at'
     ];
     public $dates = ['finished_at'];
+    protected $appends = ['auth_user_result'];
 
     public function sluggable(): array
     {
@@ -44,5 +45,15 @@ class Quiz extends Model
     public function getQuestions()
     {
         return $this->hasMany(Question::class, 'quiz_id', 'quiz_id');
+    }
+
+    public function getQuizResults()
+    {
+        return $this->hasMany(Result::class, 'quiz_id', 'quiz_id');
+    }
+
+    public function getAuthUserResultAttribute()
+    {
+        return $this->getQuizResults()->where('user_id', auth()->user()->id)->first();
     }
 }

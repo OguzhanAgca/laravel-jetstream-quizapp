@@ -21,4 +21,14 @@ class Result extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function getUser()
+    {
+        return $this->hasMany(User::class, 'id', 'user_id');
+    }
+
+    public function getQuiz()
+    {
+        return $this->belongsTo(Quiz::class, 'quiz_id', 'quiz_id');
+    }
 }
