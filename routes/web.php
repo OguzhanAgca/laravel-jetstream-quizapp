@@ -9,6 +9,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/quizzes', [HomeController::class, 'quizzes'])->name('quizzes.home');
+    Route::get('/quiz/{slug}/detail', [HomeController::class, 'quizDetail'])->name('quiz.detail');
 });
 
 // Route::middleware()->get('/dashboard', function () {

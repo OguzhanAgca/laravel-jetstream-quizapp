@@ -21,7 +21,7 @@ class QuizFactory extends Factory
         return [
             'quiz_title' => $quiz_title,
             'quiz_slug' => Str::slug($quiz_title),
-            'quiz_description' => $this->faker->sentence(rand(4, 7))
+            'quiz_description' => $this->faker->sentence(rand(7, 15))
         ];
     }
 }

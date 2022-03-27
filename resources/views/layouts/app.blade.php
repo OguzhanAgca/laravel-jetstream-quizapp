@@ -40,7 +40,7 @@
             <!-- Page Content -->
             <main class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-xl flex flex-col items-center sm:rounded-lg">
+                    <div class="bg-white shadow-xl flex flex-col items-center sm:rounded-lg">
                         @isset($content)
                             {{ $content }}
                         @endisset
