@@ -53,7 +53,7 @@
                                         <div class="flex flex-row justify-center items-center gap-2">
                                             <span class="relative flex flex-col items-center group">
                                                 <a href="{{route('questions.edit', [$quiz->quiz_id,$question->question_id])}}" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
-                                                <div class="absolute bottom-0 flex flex-col items-center hidden mb-8 group-hover:flex">
+                                                <div class="absolute bottom-0 flex-col items-center hidden mb-8 group-hover:flex">
                                                     <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
                                                         Edit
                                                     </span>
@@ -62,7 +62,7 @@
                                             </span>
                                             <span class="relative flex flex-col items-center group">
                                                 <button type="button" question-id="{{$question->question_id}}" class="btn btn-danger remove-btn"><i class="fas fa-times fa-xl py-2"></i></button>
-                                                <div class="absolute bottom-0 flex flex-col items-center hidden mb-8 group-hover:flex">
+                                                <div class="absolute bottom-0 flex-col items-center hidden mb-8 group-hover:flex">
                                                     <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
                                                         Delete
                                                     </span>

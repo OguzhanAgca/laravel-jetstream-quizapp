@@ -57,7 +57,7 @@
                                     <td class="table-cell text-center cursor-default">
                                         <div class="relative flex flex-col items-center group">
                                             {{$quiz->finished_at ? $quiz->finished_at->diffForHumans() : '-'}}
-                                            <div class="absolute bottom-0 flex flex-col items-center hidden mb-6 group-hover:flex">
+                                            <div class="absolute bottom-0 flex-col items-center hidden mb-6 group-hover:flex">
                                                 <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
                                                     {{$quiz->finished_at}}
                                                 </span>
@@ -69,7 +69,7 @@
                                         <div class="flex flex-row justify-center items-center gap-2">
                                             <span class="relative flex flex-col items-center group">
                                                 <a href="{{route('questions.index', $quiz->quiz_id)}}" class="btn btn-purple"><i class="fas fa-question py-2 fa-xl"></i></a>
-                                                <div class="absolute bottom-0 flex flex-col items-center hidden mb-8 group-hover:flex">
+                                                <div class="absolute bottom-0 flex-col items-center hidden mb-8 group-hover:flex">
                                                     <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
                                                         Questions
                                                     </span>
@@ -78,7 +78,7 @@
                                             </span>
                                             <span class="relative flex flex-col items-center group">
                                                 <a href="{{route('quizzes.edit', $quiz->quiz_id)}}" class="btn btn-primary"><i class="fas fa-pen fa-lg py-2"></i></a>
-                                                <div class="absolute bottom-0 flex flex-col items-center hidden mb-8 group-hover:flex">
+                                                <div class="absolute bottom-0 flex-col items-center hidden mb-8 group-hover:flex">
                                                     <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
                                                         Edit
                                                     </span>
@@ -87,7 +87,7 @@
                                             </span>
                                             <span class="relative flex flex-col items-center group">
                                                 <button type="button" quiz-id="{{$quiz->quiz_id}}" class="btn-danger btn remove-btn"><i class="fas fa-times fa-xl py-2"></i></button>
-                                                <div class="absolute bottom-0 flex flex-col items-center hidden mb-8 group-hover:flex">
+                                                <div class="absolute bottom-0 flex-col items-center hidden mb-8 group-hover:flex">
                                                     <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md">
                                                         Delete
                                                     </span>

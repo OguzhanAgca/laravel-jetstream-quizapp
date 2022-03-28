@@ -4,6 +4,21 @@
     </x-slot>
 
     <x-slot name="content">
+        @php
+            $quizDetails = [
+                'Question Count' => $quiz->get_questions_count,
+                'Total Participants' => $quiz->total_participants,
+                'Average Score' => $quiz->quiz_score_average
+            ];
+
+            $userResults = [
+                'Score' => $quiz->getAuthUserResult()->score,
+                'Correct' => $quiz->getAuthUserResult()->correct,
+                'Wrong' => $quiz->getAuthUserResult()->wrong,
+                'Empty' => $quiz->getAuthUserResult()->empty,
+                'Rank' => $quiz->user_rank
+            ];
+        @endphp
         <div class="container p-4 flex md:flex-row flex-col gap-5">
             <div class="flex flex-col md:w-2/5 w-full">
                 <div class="text-xl font-bold text-center mb-2">Quiz Details</div>
@@ -20,48 +35,31 @@
                     </div>
                 </div>
                 <hr class="my-2">
-                <div class="flex items-center justify-between px-2">
-                    <h4 class="text-lg font-semibold">Question Count</h4>
-                    <div class="p-1 rounded-md">{{$quiz->get_questions_count}}</div>
-                </div>
-                <hr class="my-2">
-                <div class="flex items-center justify-between px-2">
-                    <h4 class="text-lg font-semibold">Total Participants</h4>
-                    <div class="p-1 rounded-md">{{$quiz->total_participants}}</div>
-                </div>
-                <hr class="my-2">
-                <div class="flex items-center justify-between px-2">
-                    <h4 class="text-lg font-semibold">Average Score</h4>
-                    <div class="p-1 rounded-md">{{$quiz->quiz_score_average}}</div>
-                </div>
+
+                @foreach ($quizDetails as $content => $value)
+                    <div class="flex items-center justify-between px-2">
+                        <h4 class="text-lg font-semibold">{{$content}}</h4>
+                        <div class="p-1 rounded-md">{{$value}}</div>
+                    </div>
+                    @if(!$loop->last)
+                        <hr class="my-2">
+                    @endif
+                @endforeach
 
                 @if($quiz->getAuthUserResult())
                 <div class="text-xl font-bold text-center my-2">Your Results <i class="fas fa-angle-right ml-2 hover:cursor-pointer arrow"></i></div>
+
+                
                 <div id="your_results" style="display: none">
-                    <div class="flex items-center justify-between px-2">
-                        <h4 class="text-lg font-semibold">Score</h4>
-                        <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$quiz->getAuthUserResult()->score}}</div>
-                    </div>
-                    <hr class="my-2">
-                    <div class="flex items-center justify-between px-2">
-                        <h4 class="text-lg font-semibold">Correct</h4>
-                        <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$quiz->getAuthUserResult()->correct}}</div>
-                    </div>
-                    <hr class="my-2">
-                    <div class="flex items-center justify-between px-2">
-                        <h4 class="text-lg font-semibold">Wrong</h4>
-                        <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$quiz->getAuthUserResult()->wrong}}</div>
-                    </div>
-                    <hr class="my-2">
-                    <div class="flex items-center justify-between px-2">
-                        <h4 class="text-lg font-semibold">Empty</h4>
-                        <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$quiz->getAuthUserResult()->empty}}</div>
-                    </div>
-                    <hr class="my-2">
-                    <div class="flex items-center justify-between px-2">
-                        <h4 class="text-lg font-semibold">Rank</h4>
-                        <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$quiz->user_rank}}</div>
-                    </div>
+                    @foreach ($userResults as $content => $value)
+                        <div class="flex items-center justify-between px-2">
+                            <h4 class="text-lg font-semibold">{{$content}}</h4>
+                            <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$value}}</div>
+                        </div>
+                        @if(!$loop->last)
+                            <hr class="my-2">
+                        @endif
+                    @endforeach
                 </div>
                 @endif
 
