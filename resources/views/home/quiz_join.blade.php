@@ -25,7 +25,7 @@
     
                         @foreach ($options as $option)
                             <div class="flex flex-row gap-2 items-center">
-                                <input type="radio" name="{{$question->question_id}}" id="{{$option.'_'.$question->question_id}}" class="form-check">
+                                <input type="radio" name="{{$question->question_id}}" id="{{$option.'_'.$question->question_id}}" class="form-check" value="{{$option}}">
                                 <label for="{{$option.'_'.$question->question_id}}" class="mt-1">{{$question->$option}}</label>
                             </div>
                         @endforeach

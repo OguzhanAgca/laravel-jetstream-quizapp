@@ -24,7 +24,7 @@ class Quiz extends Model
         'updated_at'
     ];
     public $dates = ['finished_at'];
-    protected $appends = ['total_participants', 'quiz_score_average'];
+    protected $appends = ['total_participants', 'quiz_score_average', 'user_rank'];
 
     public function sluggable(): array
     {
@@ -50,6 +50,25 @@ class Quiz extends Model
     public function getQuizResults()
     {
         return $this->hasMany(Result::class, 'quiz_id', 'quiz_id');
+    }
+
+    public function getAuthUserResult()
+    {
+        return $this->getQuizResults()->where('user_id', auth()->user()->id)->first();
+    }
+
+    public function getUserRankAttribute()
+    {
+        $results = $this->getQuizResults()->orderByDesc('score')->get();
+
+        $rank = 0;
+        foreach ($results as $result) {
+            $rank++;
+
+            if ($result->user_id === auth()->user()->id) {
+                return $rank;
+            }
+        }
     }
 
     public function getTotalParticipantsAttribute()

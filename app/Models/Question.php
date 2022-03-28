@@ -23,4 +23,9 @@ class Question extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function getUserAnswers()
+    {
+        return $this->belongsTo(Answer::class, 'question_id', 'question_id')->where('user_id', auth()->user()->id);
+    }
 }

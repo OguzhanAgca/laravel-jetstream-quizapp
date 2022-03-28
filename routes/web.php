@@ -12,6 +12,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/quiz/{slug}', [HomeController::class, 'quizJoin'])->name('quiz.join');
     Route::post('/quiz/{slug}', [HomeController::class, 'quizStore'])->name('quiz.store');
     Route::get('/quiz/{slug}/detail', [HomeController::class, 'quizDetail'])->name('quiz.detail');
+    Route::get('/quiz/{slug}/result', [HomeController::class, 'quizResult'])->name('quiz.result');
 });
 
 Route::group([

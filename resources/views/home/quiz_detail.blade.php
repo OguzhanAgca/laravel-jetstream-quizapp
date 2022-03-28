@@ -11,7 +11,7 @@
                     <h4 class="text-lg font-semibold">Quiz End Time</h4>
                     <div class="text-sm text-red-700 relative flex flex-col items-center group">
                         <i class="fa-solid fa-circle-exclamation fa-lg"></i>
-                        <div class="absolute bottom-0 flex flex-col items-center hidden mb-3 group-hover:flex">
+                        <div class="absolute bottom-0 flex-col items-center hidden mb-3 group-hover:flex">
                             <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md text-center">
                                 {{$quiz->finished_at ? $quiz->finished_at : 'Indefinite'}}
                             </span>
@@ -22,18 +22,48 @@
                 <hr class="my-2">
                 <div class="flex items-center justify-between px-2">
                     <h4 class="text-lg font-semibold">Question Count</h4>
-                    <div class="p-1 rounded-md bg-slate-600 text-white text-sm">{{$quiz->get_questions_count}}</div>
+                    <div class="p-1 rounded-md">{{$quiz->get_questions_count}}</div>
                 </div>
                 <hr class="my-2">
                 <div class="flex items-center justify-between px-2">
                     <h4 class="text-lg font-semibold">Total Participants</h4>
-                    <div class="p-1 rounded-md bg-slate-600 text-white text-sm">{{$quiz->total_participants}}</div>
+                    <div class="p-1 rounded-md">{{$quiz->total_participants}}</div>
                 </div>
                 <hr class="my-2">
                 <div class="flex items-center justify-between px-2">
                     <h4 class="text-lg font-semibold">Average Score</h4>
-                    <div class="p-1 rounded-md bg-slate-600 text-white text-sm">{{$quiz->quiz_score_average}}</div>
+                    <div class="p-1 rounded-md">{{$quiz->quiz_score_average}}</div>
                 </div>
+
+                @if($quiz->getAuthUserResult())
+                <div class="text-xl font-bold text-center my-2">Your Results <i class="fas fa-angle-right ml-2 hover:cursor-pointer arrow"></i></div>
+                <div id="your_results" style="display: none">
+                    <div class="flex items-center justify-between px-2">
+                        <h4 class="text-lg font-semibold">Score</h4>
+                        <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$quiz->getAuthUserResult()->score}}</div>
+                    </div>
+                    <hr class="my-2">
+                    <div class="flex items-center justify-between px-2">
+                        <h4 class="text-lg font-semibold">Correct</h4>
+                        <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$quiz->getAuthUserResult()->correct}}</div>
+                    </div>
+                    <hr class="my-2">
+                    <div class="flex items-center justify-between px-2">
+                        <h4 class="text-lg font-semibold">Wrong</h4>
+                        <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$quiz->getAuthUserResult()->wrong}}</div>
+                    </div>
+                    <hr class="my-2">
+                    <div class="flex items-center justify-between px-2">
+                        <h4 class="text-lg font-semibold">Empty</h4>
+                        <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$quiz->getAuthUserResult()->empty}}</div>
+                    </div>
+                    <hr class="my-2">
+                    <div class="flex items-center justify-between px-2">
+                        <h4 class="text-lg font-semibold">Rank</h4>
+                        <div class="p-1 rounded-md bg-blue-700 text-white text-sm">{{$quiz->user_rank}}</div>
+                    </div>
+                </div>
+                @endif
 
                 <div class="text-xl font-bold text-center my-2">Top Ten User</div>
                 @if(count($quiz->getTopTenUser) > 0)
@@ -58,9 +88,31 @@
             <div class="flex flex-col md:w-3/5 w-full gap-2">
                 <div class="text-slate-700">{{$quiz->quiz_description}}</div>
                 <div>
-                    <a href="{{route('quiz.join', $quiz->quiz_slug)}}" class="btn btn-primary block w-full justify-center">Join Quiz</a>
+                    @if($quiz->getAuthUserResult())
+                        <a href="{{route('quiz.result', $quiz->quiz_slug)}}" class="btn btn-info block w-full justify-center">Show Quiz Details</a>
+                    @else                    
+                        <a href="{{route('quiz.join', $quiz->quiz_slug)}}" class="btn btn-primary block w-full justify-center">Join Quiz</a>
+                    @endif
                 </div>
             </div>
         </div>
+    </x-slot>
+
+    <x-slot name="script">
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(document).on('click', '.arrow', function(){
+                    const isClass = $(this).hasClass('fa-angle-right');
+
+                    if(isClass){
+                        $(this).removeClass('fa-angle-right').addClass('fa-angle-down');
+                        $('#your_results').slideDown('fast');
+                    } else {
+                        $(this).removeClass('fa-angle-down').addClass('fa-angle-right');
+                        $('#your_results').slideUp('fast');
+                    }
+                });
+            });
+        </script>
     </x-slot>
 </x-app-layout>

@@ -19,7 +19,7 @@
                                     <a href="{{route('quiz.detail', $quiz->quiz_slug)}}" class="text-xl font-bold">{{$quiz->quiz_title}}</a>
                                     <div class="text-sm text-red-700 relative flex flex-col items-center group">
                                         <i class="fa-solid fa-circle-exclamation fa-lg"></i>
-                                        <div class="absolute bottom-0 flex flex-col items-center hidden mb-3 group-hover:flex">
+                                        <div class="absolute bottom-0 flex-col items-center hidden mb-3 group-hover:flex">
                                             <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg rounded-md text-center">
                                                 {{$quiz->finished_at ? $quiz->finished_at : 'Indefinite'}}
                                             </span>
@@ -53,7 +53,7 @@
                     @if(count($results) > 0)
                         @foreach ($results as $result)
                             <div class="flex items-center justify-between">
-                                <a href="#" class="font-semibold">{{$result->getQuiz->quiz_title}}</a>
+                                <a href="{{route('quiz.result',$result->getQuiz->quiz_slug)}}" class="font-semibold">{{$result->getQuiz->quiz_title}}</a>
                                 <div class="text-sm p-1 rounded-md bg-green-600 text-white">{{$result->score}}</div>
                             </div>
                             @if(!$loop->last)
