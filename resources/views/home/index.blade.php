@@ -6,6 +6,7 @@
     <x-slot name="content">
         <div class="container p-4 flex md:flex-row flex-col gap-4 w-full my-1">
             <div class="md:w-3/5 w-full flex flex-col">
+                <div class="text-center text-xl font-bold mb-2">Available Quizzes</div>
                 @if(count($quizzes) > 0)
                     <div class="flex flex-col">
                         <div class="text-sm p-2 flex gap-2 items-center rounded-md bg-slate-300 mb-2">

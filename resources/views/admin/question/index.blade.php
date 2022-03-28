@@ -44,7 +44,7 @@
                                     <td class="table-cell text-center">{{$question->answer_c}}</td>
                                     <td class="table-cell text-center">{{$question->answer_d}}</td>
                                     <td class="table-cell text-center w-28 cursor-default">
-                                        <div class="p-1 rounded-full bg-green-700 text-white font-bold">
+                                        <div class="p-1 rounded-md bg-green-700 text-white font-bold">
                                             Option 
                                             <span class="uppercase">{{substr($question->correct_answer, -1)}}</span>
                                         </div>

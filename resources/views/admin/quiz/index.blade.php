@@ -5,7 +5,7 @@
 
     <x-slot name="content">
         <div class="container p-4 flex flex-col gap-5">
-            <div class="flex flex-row justify-between items-center">
+            <div class="flex md:flex-row flex-col-reverse justify-between md:items-center items-stretch gap-3">
                 <a href="{{route('quizzes.create')}}" class="btn btn-primary">Create Quiz</a>
                 <form method="get">
                     <div class="flex flex-row gap-3 items-center">
