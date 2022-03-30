@@ -10047,6 +10047,9 @@ readers do not read off random characters that represent icons */
   display: flex;
   justify-content: flex-end;
 }
+.first-letter\:uppercase::first-letter {
+  text-transform: uppercase;
+}
 .hover\:cursor-pointer:hover {
   cursor: pointer;
 }

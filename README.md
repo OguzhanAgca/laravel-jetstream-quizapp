@@ -17,6 +17,8 @@ Example:
 
     cd Downloads/laravel-jetstream-quizapp
 
+You need to specify your local database and password in the .env.example file using a code editor.
+
 Create a database named "quizapp" on your local server.
 Then run the following commands one after the other.
 
@@ -24,5 +26,7 @@ Then run the following commands one after the other.
     php artisan migrate --seed
     php artisan serve
     npm run watch
+
+Your default admin email is "example@admin.com" and password is "password". After registering, you can give admin authority to your account using this information.
 
 That is all! Now click on <a href="http://localhost:8000" target="_blank" rel="noreferrer">localhost</a> and try application.

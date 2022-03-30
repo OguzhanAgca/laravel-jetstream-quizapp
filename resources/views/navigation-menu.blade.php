@@ -105,6 +105,10 @@
                                 <x-jet-dropdown-link href="{{ route('quizzes.index') }}">
                                     {{ __('Quizzes') }}
                                 </x-jet-dropdown-link>
+
+                                <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                    {{ __('Users') }}
+                                </x-jet-dropdown-link>
                             @endif
 
                             <!-- Account Management -->
@@ -156,6 +160,9 @@
             @if (auth()->user()->type === 'admin')
                 <x-jet-responsive-nav-link href="{{ route('quizzes.index') }}" :active="request()->routeIs('quizzes.index')">
                     {{ __('Quizzes / Admin') }}
+                </x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                    {{ __('Users') }}
                 </x-jet-responsive-nav-link>
             @endif
             <x-jet-responsive-nav-link href="{{ route('quizzes.home') }}" :active="request()->routeIs('quizzes.home')">
